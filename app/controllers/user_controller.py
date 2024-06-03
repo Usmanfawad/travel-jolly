@@ -30,7 +30,8 @@ async def create_user(user: UserCreate) -> User:
     hashed_password = hash_password(user.password)
     user_dict = user.model_dump()
     user_dict["password"] = hashed_password
-    if user_collection.find_one({"email": user.email}):
+    user = await user_collection.find_one({"email": user.email})
+    if user:
         raise HTTPException(status_code=400, detail="Email already registered")
         
     result = await user_collection.insert_one(user_dict)

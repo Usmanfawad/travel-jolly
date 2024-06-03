@@ -1,31 +1,26 @@
 from pydantic import BaseModel, Field
 from datetime import date
-from typing import Optional, List, Dict
+from typing import List, Optional, Dict
+
+class Suggestion(BaseModel):
+    name: str
+    description: Optional[str]
 
 class DestinationBase(BaseModel):
-    destination_id: str
     trip_id: str
     name: str
-    description: str
+    description: Optional[str]
     start_date: date
     end_date: date
     destination_type: str
-    suggestions: Optional[List[Dict]] = None
+    suggestions: Optional[List[Suggestion]] = []
 
 class DestinationCreate(DestinationBase):
     pass
-
-class DestinationUpdate(BaseModel):
-    name: str
-    description: str
-    start_date: date
-    end_date: date
-    destination_type: str
-    suggestions: Optional[List[Dict]] = None
 
 class Destination(DestinationBase):
     id: str = Field(..., alias="_id")
 
     class Config:
         allow_population_by_field_name = True
-        orm_mode: True
+        orm_mode = True

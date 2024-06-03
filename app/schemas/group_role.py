@@ -1,21 +1,20 @@
 from pydantic import BaseModel, Field
 from typing import List
 
-class GroupRoleBase(BaseModel):
-    role_id: str
+class RoleBase(BaseModel):
     role_name: str
     permissions: List[str]
 
-class GroupRoleCreate(GroupRoleBase):
+class RoleCreate(RoleBase):
     pass
 
-class GroupRoleUpdate(BaseModel):
-    role_name: str
-    permissions: List[str]
+class RoleUpdate(BaseModel):
+    role_name: str = None
+    permissions: List[str] = None
 
-class GroupRole(GroupRoleBase):
+class Role(RoleBase):
     id: str = Field(..., alias="_id")
 
     class Config:
         allow_population_by_field_name = True
-        orm_mode: True
+        orm_mode = True

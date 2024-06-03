@@ -2,7 +2,6 @@ from pydantic import BaseModel, Field
 from typing import Optional, List, Dict
 
 class ActivityBase(BaseModel):
-    activity_id: str
     destination_id: str
     name: str
     description: str
