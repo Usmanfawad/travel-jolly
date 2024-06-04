@@ -1,17 +1,15 @@
 from pydantic import BaseModel, Field
-from typing import List
+from typing import List, Literal
 
 class RoleBase(BaseModel):
     role_name: str
-    permissions: List[str]
+    permissions: List[Literal["create","read","update","delete"]] = None
 
 class RoleCreate(RoleBase):
     pass
 
-class RoleUpdate(BaseModel):
-    role_name: str = None
-    permissions: List[str] = None
-
+class RoleUpdate(RoleBase):
+    pass
 class Role(RoleBase):
     id: str = Field(..., alias="_id")
 

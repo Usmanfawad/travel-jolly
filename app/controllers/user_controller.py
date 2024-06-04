@@ -22,7 +22,9 @@ async def get_user_by_id(user_id: str) -> User:
     user = await user_collection.find_one({"_id": ObjectId(user_id)})
     if user:
         user["_id"] = str(user["_id"])
-        return User(**user)
+        del user["password"]
+        return user
+        
     else:
         raise HTTPException(status_code=404, detail="User not found")
 
@@ -39,11 +41,16 @@ async def create_user(user: UserCreate) -> User:
     return new_user
 
 async def update_user(user_id: str, user_update: UserUpdate) -> User:
+
+    if user_update.password:
+        user_update.password = hash_password(user_update.password)
+        
     await user_collection.update_one(
         {"_id": ObjectId(user_id)},
         {"$set": user_update.model_dump(exclude_unset=True)}
     )
     updated_user = await get_user_by_id(user_id)
+    del updated_user["password"]
     return updated_user
 
 async def delete_user(user_id: str):

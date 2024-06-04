@@ -1,3 +1,4 @@
+from bson import ObjectId
 from fastapi import HTTPException
 from app.db.session import get_db
 from app.schemas.group_role import RoleCreate, RoleUpdate
@@ -5,7 +6,7 @@ from app.schemas.group_role import RoleCreate, RoleUpdate
 async def get_role_by_id(role_id: str):
     db = get_db()
     role_collection = db.get_collection("roles")
-    role_data = await role_collection.find_one({"_id": role_id})
+    role_data = await role_collection.find_one({"_id": ObjectId(role_id)})
     if role_data is None:
         raise HTTPException(status_code=404, detail="Role not found")
     role_data["_id"] = str(role_data["_id"])

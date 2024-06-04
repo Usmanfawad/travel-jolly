@@ -9,6 +9,7 @@ async def get_group_by_id(group_id: str):
     group_data = await group_collection.find_one({"_id": ObjectId(group_id)})
     if group_data is None:
         raise HTTPException(status_code=404, detail="Group not found")
+    
     group_data["_id"] = str(group_data["_id"])
     return group_data
 

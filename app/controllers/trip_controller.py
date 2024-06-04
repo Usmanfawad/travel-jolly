@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 from bson import ObjectId
 from fastapi import HTTPException
 from motor.motor_asyncio import AsyncIOMotorDatabase
@@ -6,8 +6,10 @@ from app.schemas.trip import TripCreate, TripUpdate
 
 async def get_trip_by_id(db: AsyncIOMotorDatabase, trip_id: str):
     trip = await db["trips"].find_one({"_id": ObjectId(trip_id)})
-    if trip:
-        trip["_id"] = str(trip["_id"])
+    for key in trip:
+        if type(trip[key]) in [ObjectId, datetime, date]:
+            trip[key] = str(trip[key])
+    
         return trip
     raise HTTPException(status_code=404, detail="Trip not found")
 
