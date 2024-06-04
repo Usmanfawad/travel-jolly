@@ -16,7 +16,6 @@ async def create_new_activity(activity: ActivityCreate, current_user: str = Depe
 
 @router.put("/activities/{id}", response_model=Activity)
 async def update_existing_activity(id: str, activity_update: ActivityUpdate, current_user: str = Depends(JWTBearer()), db= Depends(get_db)):
-    activity = await get_activity_by_id(db, id)
     return await update_activity(db, id, activity_update)
 
 @router.delete("/activities/{id}", response_model=dict)
