@@ -1,7 +1,7 @@
 from bson import ObjectId
 from motor.motor_asyncio import AsyncIOMotorDatabase
 from app.schemas.destination import DestinationCreate, Destination
-from datetime import datetime
+from datetime import datetime, date
 from fastapi import HTTPException
 
 async def create_destination(db: AsyncIOMotorDatabase, destination_data: DestinationCreate):
@@ -38,10 +38,14 @@ async def update_destination(db: AsyncIOMotorDatabase, destination_id: str, dest
     # Validate dates
     if destination_update.start_date >= destination_update.end_date:
         raise HTTPException(status_code=400, detail="Start date must be before end date")
-
+    destination_update = destination_update.model_dump()
+    for key in destination_update:
+        if isinstance(destination_update[key], date):
+            destination_update[key] = datetime.combine(destination_update[key], datetime.min.time())
+            
     await db["destinations"].update_one(
         {"_id": ObjectId(destination_id)},
-        {"$set": destination_update.dict()}
+        {"$set": destination_update}
     )
     updated_destination = await db["destinations"].find_one({"_id": ObjectId(destination_id)})
     if updated_destination:

@@ -8,7 +8,7 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     pass
 
-class UserUpdate(BaseModel):
+class UserUpdate(UserBase):
     id: str = Field(..., alias="_id")
 
 

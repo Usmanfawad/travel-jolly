@@ -1,7 +1,7 @@
 from http.client import HTTPResponse
 from fastapi import APIRouter, Depends
 from app.controllers.user_controller import get_user_by_id, create_user, update_user, delete_user
-from app.schemas.user import UserCreate, UserUpdate, User
+from app.schemas.user import UserBase, UserCreate, UserUpdate, User
 from app.dependencies.authDependencies.auth import JWTBearer
 router = APIRouter()
 
@@ -13,8 +13,8 @@ async def read_user(id: str):
 async def create_new_user(user: UserCreate):
     return await create_user(user)
 
-@router.put("/users/{id}", response_model=User)
-async def update_existing_user(id: str, user_update: UserUpdate, current_user: str = Depends(JWTBearer())):
+@router.put("/users/{id}", response_model=dict)
+async def update_existing_user(id: str, user_update: UserBase, current_user: str = Depends(JWTBearer())):
     if current_user != id:
         return {"status": 401, "message": "Unauthorized"}
     return await update_user(id, user_update)

@@ -1,7 +1,7 @@
 from bson import ObjectId
 from passlib.context import CryptContext
 from fastapi import HTTPException
-from app.schemas.user import UserCreate, UserUpdate, User
+from app.schemas.user import UserBase, UserCreate, UserUpdate, User
 
 from app.db.session import get_db
 db = get_db()
@@ -40,17 +40,15 @@ async def create_user(user: UserCreate) -> User:
     new_user = await get_user_by_id(str(result.inserted_id))
     return new_user
 
-async def update_user(user_id: str, user_update: UserUpdate) -> User:
+async def update_user(user_id: str, user_update: UserBase) -> User:
 
     if user_update.password:
         user_update.password = hash_password(user_update.password)
-        
     await user_collection.update_one(
         {"_id": ObjectId(user_id)},
-        {"$set": user_update.model_dump(exclude_unset=True)}
+        {"$set": user_update.model_dump(exclude_unset=True, by_alias=True)}
     )
     updated_user = await get_user_by_id(user_id)
-    del updated_user["password"]
     return updated_user
 
 async def delete_user(user_id: str):

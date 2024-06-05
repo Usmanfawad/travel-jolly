@@ -14,7 +14,7 @@ async def read_trip(id: str, db= Depends(get_db), current_user: str = Depends(JW
 async def create_new_trip(trip: TripCreate, current_user: str = Depends(JWTBearer()), db= Depends(get_db)):
     return await create_trip(db, trip, current_user)
 
-@router.put("/trips/{id}", response_model=Trip)
+@router.put("/trips/{id}", response_model=dict)
 async def update_existing_trip(id: str, trip_update: TripUpdate, current_user: str = Depends(JWTBearer()), db= Depends(get_db)):
     trip = await get_trip_by_id(db, id)
     if trip["user_id"] != current_user:

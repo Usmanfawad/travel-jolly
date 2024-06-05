@@ -87,5 +87,3 @@ class JWTBearer(HTTPBearer):
                         break
             else:
                 raise HTTPException(status_code=403, detail="You are not a member of this group")
-        else:
-            raise HTTPException(status_code=405, detail="Method not allowed")

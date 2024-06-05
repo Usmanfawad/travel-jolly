@@ -32,6 +32,10 @@ async def create_trip(db: AsyncIOMotorDatabase, trip_data: TripCreate, user_id: 
 
 async def update_trip(db: AsyncIOMotorDatabase, trip_id: str, trip_data: TripUpdate):
     update_data = trip_data.dict(exclude_unset=True)
+    for key in update_data:
+        if isinstance(update_data[key], date):
+            update_data[key] = datetime.combine(update_data[key], datetime.min.time())
+    
     result = await db["trips"].update_one({"_id": ObjectId(trip_id)}, {"$set": update_data})
     if result.modified_count == 0:
         raise HTTPException(status_code=404, detail="Trip not found")

@@ -27,17 +27,17 @@ async def update_role(role_id: str, role_update: RoleUpdate):
     update_data = {k: v for k, v in role_update.dict().items() if v is not None}
     if not update_data:
         raise HTTPException(status_code=400, detail="No data provided to update")
-    result = await role_collection.update_one({"_id": role_id}, {"$set": update_data})
+    result = await role_collection.update_one({"_id": ObjectId(role_id)}, {"$set": update_data})
     if result.matched_count == 0:
         raise HTTPException(status_code=404, detail="Role not found")
-    updated_role = await role_collection.find_one({"_id": role_id})
+    updated_role = await role_collection.find_one({"_id": ObjectId(role_id)})
     updated_role["_id"] = str(updated_role["_id"])
     return updated_role
 
 async def delete_role(role_id: str):
     db = get_db()
     role_collection = db.get_collection("roles")
-    result = await role_collection.delete_one({"_id": role_id})
+    result = await role_collection.delete_one({"_id": ObjectId(role_id)})
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Role not found")
     return {"message": "Role deleted successfully"}
