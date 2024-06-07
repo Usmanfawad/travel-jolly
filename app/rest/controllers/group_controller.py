@@ -1,6 +1,6 @@
 from fastapi import HTTPException
 from app.db.session import get_db
-from app.schemas.user_group import GroupCreate, GroupUpdate
+from app.rest.schemas.user_group import GroupCreate, GroupUpdate
 from bson import ObjectId
 
 async def get_group_by_id(group_id: str):

@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from fastapi import HTTPException
 from passlib.context import CryptContext
 from app.db.session import get_db
-from app.schemas.user import UserCreate
+from app.rest.schemas.user import UserCreate
 
 SECRET_KEY = os.environ.get("JWT_SECRET")
 

@@ -1,7 +1,7 @@
 from bson import ObjectId
 from fastapi import HTTPException
 from app.db.session import get_db
-from app.schemas.group_role import RoleCreate, RoleUpdate
+from app.rest.schemas.group_role import RoleCreate, RoleUpdate
 
 async def get_role_by_id(role_id: str):
     db = get_db()

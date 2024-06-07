@@ -2,7 +2,7 @@ from datetime import date, datetime
 from bson import ObjectId
 from fastapi import HTTPException
 from motor.motor_asyncio import AsyncIOMotorDatabase
-from app.schemas.trip import TripCreate, TripUpdate
+from app.rest.schemas.trip import TripCreate, TripUpdate
 
 async def get_trip_by_id(db: AsyncIOMotorDatabase, trip_id: str):
     trip = await db["trips"].find_one({"_id": ObjectId(trip_id)})

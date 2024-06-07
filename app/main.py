@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.rest.routers.api import router as api_router
 from app.db.session import get_db
+from app.graphql.graphql_root import graphql_router
 
 
 ORIGIN_LIST = ['*']
@@ -32,6 +33,7 @@ def get_application() -> FastAPI:
 
 app = get_application()
 
+app.include_router(graphql_router, prefix="/graphql")
 
 @app.get("/")
 def read_root():

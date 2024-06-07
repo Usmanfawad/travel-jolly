@@ -1,6 +1,6 @@
 from bson import ObjectId
 from motor.motor_asyncio import AsyncIOMotorDatabase
-from app.schemas.destination import DestinationCreate, Destination
+from app.rest.schemas.destination import DestinationCreate, Destination
 from datetime import datetime, date
 from fastapi import HTTPException
 

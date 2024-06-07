@@ -2,7 +2,7 @@ from datetime import datetime
 from bson import ObjectId
 from fastapi import HTTPException
 from motor.motor_asyncio import AsyncIOMotorDatabase
-from app.schemas.activity import ActivityCreate, ActivityUpdate
+from app.rest.schemas.activity import ActivityCreate, ActivityUpdate
 
 async def get_activity_by_id(db: AsyncIOMotorDatabase, activity_id: str):
     activity = await db["activities"].find_one({"_id": ObjectId(activity_id)})

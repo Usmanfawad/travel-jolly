@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from motor.motor_asyncio import AsyncIOMotorDatabase
 from app.rest.controllers.destination_controller import create_destination, get_destination_by_id, update_destination, delete_destination
-from app.schemas.destination import DestinationCreate, Destination
+from app.rest.schemas.destination import DestinationCreate, Destination
 from app.dependencies.authDependencies.auth import JWTBearer
 from app.db.session import get_db
 

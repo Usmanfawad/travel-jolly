@@ -1,7 +1,7 @@
 from bson import ObjectId
 from passlib.context import CryptContext
 from fastapi import HTTPException
-from app.schemas.user import UserBase, UserCreate, UserUpdate, User
+from app.rest.schemas.user import UserBase, UserCreate, UserUpdate, User
 
 from app.db.session import get_db
 db = get_db()

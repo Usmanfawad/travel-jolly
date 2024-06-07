@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from app.rest.controllers.group_controller import get_group_by_id, create_group, update_group, delete_group
-from app.schemas.user_group import GroupCreate, GroupUpdate, Group
+from app.rest.schemas.user_group import GroupCreate, GroupUpdate, Group
 from app.dependencies.authDependencies.auth import JWTBearer
 
 router = APIRouter()

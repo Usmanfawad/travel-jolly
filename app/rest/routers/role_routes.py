@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from app.rest.controllers.role_controler import get_role_by_id, create_role, update_role, delete_role
-from app.schemas.group_role import RoleCreate, RoleUpdate, Role
+from app.rest.schemas.group_role import RoleCreate, RoleUpdate, Role
 from app.dependencies.authDependencies.auth import JWTBearer
 
 router = APIRouter()
