@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from fastapi import Header, HTTPException, Request
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 import jwt
-from app.controllers.user_controller import get_user_by_id
+from app.rest.controllers.user_controller import get_user_by_id
 from app.db.session import get_db
 
 load_dotenv()

@@ -1,7 +1,7 @@
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers.api import router as api_router
+from app.rest.routers.api import router as api_router
 from app.db.session import get_db
 
 

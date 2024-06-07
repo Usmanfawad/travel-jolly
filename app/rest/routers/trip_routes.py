@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
-from app.controllers.trip_controller import get_trip_by_id, create_trip, update_trip, delete_trip
+from app.rest.controllers.trip_controller import get_trip_by_id, create_trip, update_trip, delete_trip
 from app.schemas.trip import TripCreate, TripUpdate, Trip
 from app.dependencies.authDependencies.auth import JWTBearer
 from app.db.session import get_db

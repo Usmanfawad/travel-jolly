@@ -1,6 +1,6 @@
 from http.client import HTTPResponse
 from fastapi import APIRouter, Depends
-from app.controllers.user_controller import get_user_by_id, create_user, update_user, delete_user
+from app.rest.controllers.user_controller import get_user_by_id, create_user, update_user, delete_user
 from app.schemas.user import UserBase, UserCreate, UserUpdate, User
 from app.dependencies.authDependencies.auth import JWTBearer
 router = APIRouter()

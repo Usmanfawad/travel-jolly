@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
-from app.controllers.activity_controller import get_activity_by_id, create_activity, update_activity, delete_activity
+from app.rest.controllers.activity_controller import get_activity_by_id, create_activity, update_activity, delete_activity
 from app.schemas.activity import ActivityCreate, ActivityUpdate, Activity
 from app.dependencies.authDependencies.auth import JWTBearer
 from app.db.session import get_db
