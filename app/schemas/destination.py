@@ -2,9 +2,11 @@ from pydantic import BaseModel, Field
 from datetime import date
 from typing import List, Optional, Dict
 
+
 class Suggestion(BaseModel):
     name: str
     description: Optional[str]
+
 
 class DestinationBase(BaseModel):
     trip_id: str
@@ -15,12 +17,14 @@ class DestinationBase(BaseModel):
     destination_type: str
     suggestions: Optional[List[Suggestion]] = []
 
+
 class DestinationCreate(DestinationBase):
     pass
+
 
 class Destination(DestinationBase):
     id: str = Field(..., alias="_id")
 
     class Config:
-        allow_population_by_field_name = True
-        orm_mode = True
+        populate_by_name = True
+        from_attributes = True

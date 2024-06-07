@@ -4,7 +4,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routers.api import router as api_router
 from app.db.session import get_db
 
+
 ORIGIN_LIST = ['*']
+
 
 def get_application() -> FastAPI:
     ''' Configure, start and return the application '''
@@ -30,9 +32,11 @@ def get_application() -> FastAPI:
 
 app = get_application()
 
+
 @app.get("/")
 def read_root():
     return "New Server is running"
+
 
 if __name__ == "__main__":
     import uvicorn
