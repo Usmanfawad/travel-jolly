@@ -18,7 +18,12 @@ class DestinationType:
     destination_type: str
     suggestions: Optional[List[SuggestionType]] = strawberry.field(default_factory=list)
 
-@strawberry.type
+@strawberry.input
+class SuggestionInput:
+    name: str
+    description: Optional[str] = None    
+
+@strawberry.input
 class DestinationInput:
     trip_id: str
     name: str
@@ -26,4 +31,4 @@ class DestinationInput:
     start_date: date
     end_date: date
     destination_type: str
-    suggestions: Optional[List[SuggestionType]] = None
+    suggestions: Optional[List[SuggestionInput]] = None

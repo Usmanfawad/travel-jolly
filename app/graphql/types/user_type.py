@@ -5,7 +5,7 @@ class UserType:
     id: str
     email: str
 
-@strawberry.type
+@strawberry.input
 class UserInput:
     email: str
     password: str

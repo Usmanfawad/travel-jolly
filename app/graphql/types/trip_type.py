@@ -16,7 +16,7 @@ class TripType:
     created_date: datetime
 
 
-@strawberry.type
+@strawberry.input
 class TripInput:
     name: str
     location: str

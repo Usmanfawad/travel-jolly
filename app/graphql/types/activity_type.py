@@ -1,7 +1,7 @@
 import strawberry
 from typing import List, Optional
 
-from app.graphql.types.destination_type import SuggestionType
+from app.graphql.types.destination_type import SuggestionInput, SuggestionType
 
 
 @strawberry.type
@@ -12,9 +12,9 @@ class ActivityType:
     description: str
     suggestions: Optional[List[SuggestionType]] = None
 
-@strawberry.type
+@strawberry.input
 class ActivityInput:
     destination_id: str
     name: str
     description: str
-    suggestions: Optional[List[SuggestionType]] = None
+    suggestions: Optional[List[SuggestionInput]] = None

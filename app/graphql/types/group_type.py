@@ -13,8 +13,13 @@ class GroupType:
     members: List[GroupMemberType]
     trip_ids: List[str]
 
-@strawberry.type
+@strawberry.input
+class GroupMemberInput:
+    user_id: str
+    role_id: str
+
+@strawberry.input
 class GroupInput:
     group_name: str
-    members: List[GroupMemberType]
+    members: List[GroupMemberInput]
     trip_ids: List[str]
