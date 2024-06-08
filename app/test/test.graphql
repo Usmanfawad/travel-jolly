@@ -1,0 +1,255 @@
+# User Mutations
+
+mutation CreateUser($input: UserInput!) {
+    createUser(input: $input) {
+        id
+        email
+    }
+}
+
+mutation UpdateUser($id: String!, $input: UserInput!) {
+    updateUser(id: $id, input: $input) {
+        id
+        email
+    }
+}
+
+mutation DeleteUser($id: String!) {
+    deleteUser(id: $id)
+}
+
+# Group Mutations
+
+mutation CreateGroup($input: GroupInput!) {
+    createGroup(input: $input) {
+        id
+        group_name
+        members {
+            user_id
+            role
+        }
+        trip_ids
+    }
+}
+
+mutation UpdateGroup($id: String!, $input: GroupInput!) {
+    updateGroup(id: $id, input: $input) {
+        id
+        group_name
+        members {
+            user_id
+            role
+        }
+        trip_ids
+    }
+}
+
+mutation DeleteGroup($id: String!) {
+    deleteGroup(id: $id)
+}
+
+# Trip Mutations
+
+mutation CreateTrip($input: TripInput!, $user_id: String!) {
+    createTrip(input: $input, user_id: $user_id) {
+        id
+        name
+        location
+        description
+        start_date
+        end_date
+        budget
+        user_id
+        created_date
+    }
+}
+
+mutation UpdateTrip($id: String!, $input: TripInput!) {
+    updateTrip(id: $id, input: $input) {
+        id
+        name
+        location
+        description
+        start_date
+        end_date
+        budget
+    }
+}
+
+mutation DeleteTrip($id: String!) {
+    deleteTrip(id: $id)
+}
+
+# Destination Mutations
+
+mutation CreateDestination($input: DestinationInput!) {
+    createDestination(input: $input) {
+        id
+        name
+        description
+        location
+    }
+}
+
+mutation UpdateDestination($id: String!, $input: DestinationInput!) {
+    updateDestination(id: $id, input: $input) {
+        id
+        name
+        description
+        location
+    }
+}
+
+mutation DeleteDestination($id: String!) {
+    deleteDestination(id: $id)
+}
+
+# Activity Mutations
+
+mutation CreateActivity($input: ActivityInput!) {
+    createActivity(input: $input) {
+        id
+        name
+        description
+        location
+        start_time
+        end_time
+    }
+}
+
+mutation UpdateActivity($id: String!, $input: ActivityInput!) {
+    updateActivity(id: $id, input: $input) {
+        id
+        name
+        description
+        location
+        start_time
+        end_time
+    }
+}
+
+mutation DeleteActivity($id: String!) {
+    deleteActivity(id: $id)
+}
+
+
+# data
+{
+    "createUserInput": {
+        "input": {
+            "email": "test@example.com",
+            "password": "securepassword"
+        }
+    },
+    "updateUserInput": {
+        "id": "60c72b2f5f1b2c001c8e4b8a",
+        "input": {
+            "email": "updated@example.com",
+            "password": "newsecurepassword"
+        }
+    },
+    "deleteUserInput": {
+        "id": "60c72b2f5f1b2c001c8e4b8a"
+    },
+    "createGroupInput": {
+        "input": {
+            "group_name": "Test Group",
+            "members": [
+                {
+                    "user_id": "60c72b2f5f1b2c001c8e4b8a",
+                    "role": "admin"
+                },
+                {
+                    "user_id": "60c72b2f5f1b2c001c8e4b8b",
+                    "role": "member"
+                }
+            ],
+            "trip_ids": ["trip1", "trip2"]
+        }
+    },
+    "updateGroupInput": {
+        "id": "60c72b2f5f1b2c001c8e4b8a",
+        "input": {
+            "group_name": "Updated Group",
+            "members": [
+                {
+                    "user_id": "60c72b2f5f1b2c001c8e4b8a",
+                    "role": "admin"
+                },
+                {
+                    "user_id": "60c72b2f5f1b2c001c8e4b8b",
+                    "role": "member"
+                }
+            ],
+            "trip_ids": ["trip3"]
+        }
+    },
+    "deleteGroupInput": {
+        "id": "60c72b2f5f1b2c001c8e4b8a"
+    },
+    "createTripInput": {
+        "input": {
+            "name": "Test Trip",
+            "location": "Paris",
+            "description": "A trip to Paris",
+            "start_date": "2024-07-01",
+            "end_date": "2024-07-10",
+            "budget": 1500
+        },
+        "user_id": "60c72b2f5f1b2c001c8e4b8a"
+    },
+    "updateTripInput": {
+        "id": "60c72b2f5f1b2c001c8e4b8a",
+        "input": {
+            "name": "Updated Trip",
+            "location": "New York",
+            "description": "A trip to New York",
+            "start_date": "2024-08-01",
+            "end_date": "2024-08-10",
+            "budget": 2000
+        }
+    },
+    "deleteTripInput": {
+        "id": "60c72b2f5f1b2c001c8e4b8a"
+    },
+    "createDestinationInput": {
+        "input": {
+            "name": "Eiffel Tower",
+            "description": "A famous landmark in Paris",
+            "location": "Paris"
+        }
+    },
+    "updateDestinationInput": {
+        "id": "60c72b2f5f1b2c001c8e4b8a",
+        "input": {
+            "name": "Louvre Museum",
+            "description": "A famous museum in Paris",
+            "location": "Paris"
+        }
+    },
+    "deleteDestinationInput": {
+        "id": "60c72b2f5f1b2c001c8e4b8a"
+    },
+    "createActivityInput": {
+        "input": {
+            "name": "Sightseeing Tour",
+            "description": "A guided tour of the city",
+            "location": "Paris",
+            "start_time": "2024-07-01T10:00:00Z",
+            "end_time": "2024-07-01T12:00:00Z"
+        }
+    },
+    "updateActivityInput": {
+        "id": "60c72b2f5f1b2c001c8e4b8a",
+        "input": {
+            "name": "Updated Tour",
+            "description": "An updated guided tour of the city",
+            "location": "New York",
+            "start_time": "2024-08-01T10:00:00Z",
+            "end_time": "2024-08-01T12:00:00Z"
+        }
+    },
+    "deleteActivityInput": {
+        "id": "60c72b2f5f1b2c001c8e4b8a"
+    }
+}
