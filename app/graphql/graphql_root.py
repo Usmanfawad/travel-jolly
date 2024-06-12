@@ -14,8 +14,10 @@ from app.graphql.mutations import (
     activity_mutation
 )
 
+
 from strawberry import Schema
 from strawberry.fastapi import GraphQLRouter
+
 
 @strawberry.type
 class Query(
@@ -26,6 +28,7 @@ class Query(
     activity_query.ActivityQuery
 ):
     pass
+
 
 @strawberry.type
 class Mutation(
